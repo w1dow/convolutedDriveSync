@@ -1,3 +1,6 @@
+
+#face mesh ka code
+
 import cv2
 import mediapipe as mp
 import numpy as np
@@ -36,7 +39,7 @@ with mp_face_mesh.FaceMesh(
 
             cv2.imshow('Face Mesh Overlay', frame)
 
-
+        # cv2.imshow('face',image)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
