@@ -9,8 +9,7 @@ mp_face_mesh = mp.solutions.face_mesh
 
 # Initialize MediaPipe face mesh model
 with mp_face_mesh.FaceMesh(
-        static_image_mode=False,
-        max_num_faces=100,
+        max_num_faces=2,
         min_detection_confidence=0.5,
         min_tracking_confidence=0.5) as face_mesh:
 
@@ -22,7 +21,7 @@ with mp_face_mesh.FaceMesh(
 
     while cap.isOpened():
         success, image = cap.read()
-        # cv2.flip(image)
+        image = cv2.flip(image,1) 
         if not success:
             break
 
