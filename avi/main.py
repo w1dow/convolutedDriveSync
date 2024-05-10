@@ -1,36 +1,55 @@
+import cv2
+import mediapipe as mp
+import numpy as np
 
-# importing libraries 
-import cv2 
-import numpy as np 
-import dlib
-  
-# Create a VideoCapture object and read from input file 
-cap = cv2.VideoCapture('C:\\fest\\convluted-driveSync\\avi\\vid.mp4') 
-  
-# Check if camera opened successfully 
-if (cap.isOpened()== False): 
-    print("Error opening video file") 
-  
-# Read until video is completed 
-while(cap.isOpened()): 
-      
-# Capture frame-by-frame 
-    ret, frame = cap.read() 
-    if ret == True: 
-    # Display the resulting frame 
-        cv2.imshow('Frame', frame) 
-          
-    # Press Q on keyboard to exit 
-        if cv2.waitKey(25) & 0xFF == ord('q'): 
+mp_drawing = mp.solutions.drawing_utils
+mp_face_mesh = mp.solutions.face_mesh
+
+
+
+# Initialize MediaPipe face mesh model
+with mp_face_mesh.FaceMesh(
+        static_image_mode=False,
+        max_num_faces=100,
+        min_detection_confidence=0.5,
+        min_tracking_confidence=0.5) as face_mesh:
+
+    # OpenCV video capture
+    cap = cv2.VideoCapture(0)
+
+    # Create OpenCV windows
+    cv2.namedWindow('Face Mesh Overlay')
+
+    while cap.isOpened():
+        success, image = cap.read()
+        # cv2.flip(image)
+        if not success:
             break
-  
-# Break the loop 
-    else: 
-        break
-  
-# When everything done, release 
-# the video capture object 
-cap.release() 
-  
-# Closes all the frames 
-cv2.destroyAllWindows() 
+
+        # Convert the image to RGB
+        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+        # Process the image and get face mesh data
+        results = face_mesh.process(image_rgb)
+
+        if results.multi_face_landmarks:
+            # Extract mesh data
+            face_mesh_landmarks = results.multi_face_landmarks[0]
+
+            # Draw face mesh
+            annotated_image = image.copy()
+            height, width, _ = annotated_image.shape 
+            frame = np.zeros((height,width,3),np.uint8)
+            mp_drawing.draw_landmarks(frame, face_mesh_landmarks)
+
+            # Show annotated image with face mesh overlay
+            cv2.imshow('Face Mesh Overlay', frame)
+
+        # Show original video feed
+        # cv2.imshow('Video Feed', image)
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()

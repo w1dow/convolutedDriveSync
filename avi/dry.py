@@ -9,14 +9,14 @@ def calculate_EAR(eye):
 	ear_aspect_ratio = (A+B)/(2.0*C)
 	return ear_aspect_ratio
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
+# cap = cv2.VideoCapture('C:\\fest\\convluted-driveSync\\avi\\vid.mp4') # takin vid input updateinfffffo
 hog_face_detector = dlib.get_frontal_face_detector()
-dlib_facelandmark = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
+dlib_facelandmark = dlib.shape_predictor("C:\\fest\\convluted-driveSync\\avi\\shape_predictor_68_face_landmarks.dat")
 
 while True:
     _, frame = cap.read()
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
     faces = hog_face_detector(gray)
     for face in faces:
 
@@ -58,7 +58,6 @@ while True:
         		cv2.FONT_HERSHEY_SIMPLEX,2,(0,0,255),4)
         	print("Drowsy")
         print(EAR)
-
     cv2.imshow("Are you Sleepy", frame)
 
     key = cv2.waitKey(1)
@@ -66,3 +65,7 @@ while True:
         break
 cap.release()
 cv2.destroyAllWindows()
+
+
+height, width, _ = feed.shape 
+    frame = np.zeros((height,width,3),np.uint8)
