@@ -181,6 +181,7 @@ def UI():
 
     speed.grid(row=0, rowspan=2, column=0, columnspan=2, sticky='ew')
 
+    [window.after(105 * i, lambda i=i: speed.step(1)) for i in range(19)]
 
     # Run
     window.mainloop()
