@@ -23,4 +23,13 @@ A data set is trained in which the steering angle is mapped to the curve of the 
 This data set is then implemented using sensor fusion method to run the car on the road.
 
 
+WorkFlow:
+There are 3 folders respectively for the 3 team members working on 3 features.
+sam = contains all the ui and front-end involved
+avi = working on eye detection and driver saftey
+arsh  = working on the autonomus driving feature
+
+IN the end we will merge all the folders and run it using a single file
+
+
 
