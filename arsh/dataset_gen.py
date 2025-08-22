@@ -7,7 +7,7 @@ import os
 from PIL import Image, ImageFilter
 
 joy = pyvjoy.VJoyDevice(1)
-def create_folder(folder):
+def create_folder(folder)
     full_path = os.path.join(os.getcwd(), folder)
     if not os.path.exists(full_path):
         os.makedirs(full_path)
