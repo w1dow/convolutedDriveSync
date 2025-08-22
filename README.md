@@ -1,5 +1,10 @@
 Title: Driverless experience on Indian roads.
 
+
+<video src="media/run.mp4" controls width="600"></video>
+
+
+
 Background:
 Unethical driving practices in India lead to thousands of deaths every year.Specially abled people are not able to use vehicles as per their interests.
 Using computer vision and behavioural cloning to help drivers assist and lead vehicles to an autonomous future ensuring saftey.
@@ -22,12 +27,6 @@ Solution:
 A data set is trained in which the steering angle is mapped to the curve of the road.
 This data set is then implemented using sensor fusion method to run the car on the road.
 
-
-WorkFlow:
-There are 3 folders respectively for the 3 team members working on 3 features.
-sam = contains all the ui and front-end involved
-avi = working on eye detection and driver saftey
-arsh  = working on the autonomus driving feature
 
 IN the end we will merge all the folders and run it using a single file
 
